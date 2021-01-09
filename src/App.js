@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Route } from 'react-router';
 import { calculateWinner } from './helper';
 import Board from './components/Board';
 import History from './components/History';
@@ -45,27 +46,29 @@ const App = () => {
   };
 
   return (
-    <div className="app">
-      <h1>
-        TIC <span className="text-green">TAC</span> TOE
-      </h1>
-      <StatusMessage winner={winner} current={current} />
-      <Board
-        board={current.board}
-        handleSquareClick={handleSquareClick}
-        winningSquares={winningSquares}
-      />
-      <button
-        type="button"
-        onClick={onNewGame}
-        className={`btn-reset ${winner ? 'active' : ''}`}
-      >
-        Start new game
-      </button>
-      <h2 style={{ fontWeight: `normal` }}>Current game history</h2>
-      <History history={history} moveTo={moveTo} currentMove={currentMove} />
-      <div className="bg-balls" />
-    </div>
+    <Route exact path="/">
+      <div className="app">
+        <h1>
+          TIC <span className="text-green">TAC</span> TOE
+        </h1>
+        <StatusMessage winner={winner} current={current} />
+        <Board
+          board={current.board}
+          handleSquareClick={handleSquareClick}
+          winningSquares={winningSquares}
+        />
+        <button
+          type="button"
+          onClick={onNewGame}
+          className={`btn-reset ${winner ? 'active' : ''}`}
+        >
+          Start new game
+        </button>
+        <h2 style={{ fontWeight: `normal` }}>Current game history</h2>
+        <History history={history} moveTo={moveTo} currentMove={currentMove} />
+        <div className="bg-balls" />
+      </div>
+    </Route>
   );
 };
 
